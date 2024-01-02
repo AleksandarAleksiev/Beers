@@ -1,0 +1,96 @@
+[versions]
+compileSdk = "34"
+minSdk = "28"
+targetSdk = "34"
+gradleplugin = "8.2.0"
+kotlin = "1.9.21"
+
+composeBoM = "2023.10.01"
+composeCompiler = "1.5.7"
+
+material = "1.11.0"
+composeMaterial3 = "1.1.2"
+
+activityCompose = "1.8.2"
+lifecycleRuntime = "2.6.2"
+lifecycleViewModelCompose = "2.6.2"
+
+accompanistuiController = "0.32.0"
+
+androidXCore = "1.12.0"
+
+ktor = "2.3.7"
+
+hilt = "2.50"
+
+ksp = "1.9.10-1.0.13"
+
+junitTest = "4.13.2"
+androidTestJUnit4 = "1.1.5"
+androidTestEspresso = "3.5.1"
+
+[libraries]
+#BoM
+kotlinBoM = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
+composeBoM = { module = "androidx.compose:compose-bom", version.ref = "composeBoM" }
+
+#compose
+composeUi = { module = "androidx.compose.ui:ui" }
+composeFoundation = { module = "androidx.compose.foundation:foundation" }
+composePreview = { module = "androidx.compose.ui:ui-tooling-preview" }
+composeTooling = { module = "androidx.compose.ui:ui-tooling" }
+
+#accompanist
+accompanistUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistuiController" }
+
+#material
+material3 = { module = "com.google.android.material:material", version.ref = "material" }
+composeMaterial3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
+composeMaterialIcons = { module = "androidx.compose.material:material-icons-core" }
+composeMaterialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
+
+#lifecycle
+activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+lifecycleRuntime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntime" }
+lifecycleViewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewModelCompose" }
+
+#androidX
+androidXCore = { module = "androidx.core:core-ktx", version.ref = "androidXCore" }
+
+#ktor
+ktorContentNegotioation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktorJson = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktorCIO = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktorWebSockets = { module = "io.ktor:ktor-client-websockets", version.ref = "ktor" }
+ktorLogging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+
+#hilt
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hiltCompiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+
+#unit test
+junitTest = { module = "junit:junit", version.ref = "junitTest" }
+kotlinTest = { module = "org.jetbrains.kotlin:kotlin-test" }
+kotlinJunitTest = { module = "org.jetbrains.kotlin:kotlin-test-junit" }
+
+#android tests
+androidTestEspressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "androidTestEspresso" }
+androidTestJunit4 = { module = "androidx.test.ext:junit", version.ref = "androidTestJUnit4" }
+androidCompioseUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+androidCompioseUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "gradleplugin" }
+androidLibrary = { id = "com.android.library", version.ref = "gradleplugin" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+[bundles]
+compose = ["composeUi", "composePreview", "composeMaterial3", "composeMaterialIcons", "composeMaterialIconsExtended", "activityCompose", "lifecycleViewModelCompose"]
+accompanist = ["accompanistUiController"]
+ktor = ["ktorCIO", "ktorJson", "ktorWebSockets", "ktorLogging", "ktorContentNegotioation"]
+unitTest = ["androidTestJunit4", "kotlinTest", "kotlinJunitTest"]
+androidTest = ["androidTestJunit4", "androidCompioseUiTestJunit4", "androidTestEspressoCore", "kotlinTest", "kotlinJunitTest"]
