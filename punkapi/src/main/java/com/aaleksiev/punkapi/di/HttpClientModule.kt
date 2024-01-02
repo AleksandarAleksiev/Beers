@@ -19,6 +19,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.resources.Resources
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -31,7 +32,17 @@ internal class HttpClientModule {
             requestTimeout = 10_000
         }
         install(ContentNegotiation) {
-            json()
+            json(
+                json = Json {
+                    encodeDefaults = true
+                    isLenient = true
+                    allowSpecialFloatingPointValues = true
+                    allowStructuredMapKeys = true
+                    prettyPrint = true
+                    useArrayPolymorphism = false
+                    ignoreUnknownKeys = true
+                }
+            )
         }
         install(Resources)
         install(Logging) {

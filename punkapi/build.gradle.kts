@@ -43,11 +43,13 @@ android {
 
 dependencies {
     val kotlinBoM = platform(libs.kotlinBoM)
-    
+    implementation(project(":common:model"))
+
     implementation(kotlinBoM)
     implementation(libs.androidXCore)
     implementation(libs.hilt)
     implementation(libs.bundles.ktor)
+    implementation(libs.bundles.kotlinX)
 
     ksp(libs.hiltCompiler)
 

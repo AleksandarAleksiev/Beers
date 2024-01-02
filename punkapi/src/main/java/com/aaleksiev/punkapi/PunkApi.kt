@@ -1,9 +1,8 @@
 package com.aaleksiev.punkapi
 
-import com.aaleksiev.punkapi.model.request.BeerDetailsRequest
-import com.aaleksiev.punkapi.model.response.BeerResponse
+import com.aaleksiev.common.model.Beer
 
 interface PunkApi {
-    suspend fun beers(): List<BeerResponse>
-    suspend fun beerDetails(request: BeerDetailsRequest): BeerResponse
+    suspend fun beers(): List<Beer>
+    suspend fun beerDetails(id: Long): Beer
 }

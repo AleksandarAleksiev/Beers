@@ -4,33 +4,33 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BeerResponse(
+internal data class BeerResponse(
     val id: Long,
     val name: String,
     val tagline: String,
     val description: String,
     @SerialName("image_url")
     val imageUrl: String,
-    val ingredients: Ingredients,
+    val ingredients: IngredientsResponse,
 )
 
 @Serializable
-data class Ingredients(
-    val malt: List<Ingredient>,
-    val hops: List<Ingredient>,
+internal data class IngredientsResponse(
+    val malt: List<IngredientResponse>,
+    val hops: List<IngredientResponse>,
     val yeast: String,
 )
 
 @Serializable
-data class Ingredient(
+internal data class IngredientResponse(
     val name: String,
-    val amount: Amount,
+    val amount: AmountResponse,
     val add: String? = null,
     val attribute: String? = null,
 )
 
 @Serializable
-data class Amount(
+internal data class AmountResponse(
     val value: String,
     val unit: String,
 )

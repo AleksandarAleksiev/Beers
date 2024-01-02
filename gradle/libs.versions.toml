@@ -7,6 +7,7 @@ kotlin = "1.9.21"
 
 composeBoM = "2023.10.01"
 composeCompiler = "1.5.7"
+composeNavigation = "2.7.6"
 
 material = "1.11.0"
 composeMaterial3 = "1.1.2"
@@ -20,10 +21,12 @@ accompanistuiController = "0.32.0"
 androidXCore = "1.12.0"
 
 ktor = "2.3.7"
+kotlinX = "1.6.0"
 
 hilt = "2.50"
+hiltNavigationCompose = "1.1.0"
 
-ksp = "1.9.10-1.0.13"
+ksp = "1.9.21-1.0.15"
 
 junitTest = "4.13.2"
 androidTestJUnit4 = "1.1.5"
@@ -39,6 +42,7 @@ composeUi = { module = "androidx.compose.ui:ui" }
 composeFoundation = { module = "androidx.compose.foundation:foundation" }
 composePreview = { module = "androidx.compose.ui:ui-tooling-preview" }
 composeTooling = { module = "androidx.compose.ui:ui-tooling" }
+composeNavigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 
 #accompanist
 accompanistUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistuiController" }
@@ -65,9 +69,13 @@ ktorWebSockets = { module = "io.ktor:ktor-client-websockets", version.ref = "kto
 ktorLogging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktorResources = { module = "io.ktor:ktor-client-resources", version.ref = "ktor" }
 
+#kotlinx
+kotlinXSerialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinX" }
+
 #hilt
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hiltCompiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hiltNavigationCompose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 
 #unit test
 junitTest = { module = "junit:junit", version.ref = "junitTest" }
@@ -85,12 +93,15 @@ androidApplication = { id = "com.android.application", version.ref = "gradleplug
 androidLibrary = { id = "com.android.library", version.ref = "gradleplugin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
 compose = ["composeUi", "composePreview", "composeMaterial3", "composeMaterialIcons", "composeMaterialIconsExtended", "activityCompose", "lifecycleViewModelCompose"]
+navigation = ["composeNavigation", "hiltNavigationCompose"]
 accompanist = ["accompanistUiController"]
 ktor = ["ktorCIO", "ktorJson", "ktorWebSockets", "ktorLogging", "ktorContentNegotioation", "ktorResources"]
+kotlinX = ["kotlinXSerialization"]
 unitTest = ["androidTestJunit4", "kotlinTest", "kotlinJunitTest"]
 androidTest = ["androidTestJunit4", "androidCompioseUiTestJunit4", "androidTestEspressoCore", "kotlinTest", "kotlinJunitTest"]

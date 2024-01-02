@@ -1,5 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":common:model")
+
+
+include(":common")
+
+
 pluginManagement {
     repositories {
         google()
