@@ -4,15 +4,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.aaleksiev.beer.ui.beer.BeersScreen
 
 object BeersNavigation {
-    fun NavController.openBeers() {
-        navigate(route = "Beers") {
-            launchSingleTop = true
-        }
-    }
-    fun NavGraphBuilder.beersNavGraph() {
-        navigation(startDestination = "BeersScreen", route = "Beers") {
+    const val Beers = "Beers"
+    fun NavGraphBuilder.beersNavGraph(navController: NavController) {
+        navigation(startDestination = "BeersScreen", route = Beers) {
             beersScreen()
             beerDetailsScreen()
         }
@@ -20,7 +17,7 @@ object BeersNavigation {
 
     private fun NavGraphBuilder.beersScreen() {
         composable(route = "BeersScreen") {
-
+            BeersScreen()
         }
     }
 

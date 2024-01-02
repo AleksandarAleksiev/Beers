@@ -56,6 +56,8 @@ dependencies {
     val kotlinBoM = platform(libs.kotlinBoM)
     debugImplementation(libs.composeTooling)
 
+    implementation(project(":beer"))
+
     implementation(composeBoM)
     implementation(kotlinBoM)
     implementation(libs.material3)
@@ -66,6 +68,7 @@ dependencies {
     implementation(libs.lifecycleRuntime)
 
     implementation(libs.bundles.ktor)
+    implementation(libs.bundles.navigation)
 
     implementation(libs.hilt)
 
