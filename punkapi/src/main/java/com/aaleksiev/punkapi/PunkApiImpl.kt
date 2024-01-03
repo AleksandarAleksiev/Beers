@@ -26,7 +26,8 @@ internal class PunkApiImpl @Inject constructor(
     override suspend fun beerDetails(id: Long): Beer =
         httpClient
             .get(BeerDetailsRequest(id))
-            .body<BeerResponse>()
+            .body<List<BeerResponse>>()
+            .first()
             .asBeer()
 
     private fun BeerResponse.asBeer() = Beer(
@@ -38,7 +39,7 @@ internal class PunkApiImpl @Inject constructor(
         ingredients = Ingredients(
             malt = ingredients.malt.map { it.asIngredient() },
             hops = ingredients.hops.map { it.asIngredient() },
-            yeast = ingredients.yeast,
+            yeast = Ingredient(name = ingredients.yeast),
         )
     )
 

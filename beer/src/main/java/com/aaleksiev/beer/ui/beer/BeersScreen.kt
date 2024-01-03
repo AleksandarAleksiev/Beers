@@ -1,6 +1,7 @@
 package com.aaleksiev.beer.ui.beer
 
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,10 +29,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.aaleksiev.beer.ui.beer.BeersViewEvent.Reload
+import com.aaleksiev.beer.ui.BeersViewEvent
+import com.aaleksiev.beer.ui.BeersViewEvent.Reload
 import com.aaleksiev.beers.R.string
+import com.aaleksiev.core.designsystem.ui.theme.BeersTheme
 import com.aaleksiev.core.designsystem.ui.theme.paddings
+import com.aaleksiev.core.model.Amount
 import com.aaleksiev.core.model.Beer
+import com.aaleksiev.core.model.Ingredient
+import com.aaleksiev.core.model.Ingredients
 import com.aaleksiev.core.ui.UiState
 import com.aaleksiev.core.ui.UiState.Error
 import com.aaleksiev.core.ui.UiState.Loading
@@ -39,6 +45,7 @@ import com.aaleksiev.core.ui.UiState.Success
 import com.aaleksiev.core.ui.appbar.SimpleTopAppBar
 import com.aaleksiev.core.ui.error.RetryableError
 import com.aaleksiev.core.ui.insets.noInsets
+import com.aaleksiev.core.ui.preview.ThemePreview
 import com.aaleksiev.core.ui.progress.IndeterminateProgressIndicator
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,6 +53,7 @@ import com.aaleksiev.core.ui.progress.IndeterminateProgressIndicator
 internal fun BeersScreen(
   uiState: UiState<List<Beer>>,
   viewEvent: (BeersViewEvent) -> Unit,
+  openBeerDetails: (Long, String) -> Unit,
 ) {
   val scrollBehaviour = TopAppBarDefaults.pinnedScrollBehavior()
   Scaffold(
@@ -73,7 +81,8 @@ internal fun BeersScreen(
 
         is Success -> BeersList(
           modifier = Modifier.padding(paddings),
-          beers = state.data
+          beers = state.data,
+          openBeerDetails = openBeerDetails,
         )
       }
     }
@@ -83,7 +92,8 @@ internal fun BeersScreen(
 @Composable
 private fun BeersList(
   modifier: Modifier = Modifier,
-  beers: List<Beer>
+  beers: List<Beer>,
+  openBeerDetails: (Long, String) -> Unit,
 ) {
   LazyColumn(
     modifier = modifier,
@@ -96,15 +106,23 @@ private fun BeersList(
     verticalArrangement = Arrangement.spacedBy(MaterialTheme.paddings.small),
   ) {
     items(items = beers, key = { beer -> beer.id }) { beer ->
-      BeerItem(beer)
+      BeerItem(
+        beer = beer,
+        openBeerDetails = openBeerDetails,
+      )
     }
   }
 }
 
 @Composable
-private fun BeerItem(beer: Beer) {
+private fun BeerItem(
+  beer: Beer,
+  openBeerDetails: (Long, String) -> Unit,
+) {
   Card(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = Modifier
+      .fillMaxWidth()
+      .clickable { openBeerDetails(beer.id, beer.name) },
   ) {
     Row(
       modifier = Modifier.padding(MaterialTheme.paddings.small),
@@ -132,5 +150,51 @@ private fun BeerItem(beer: Beer) {
         )
       }
     }
+  }
+}
+
+@ThemePreview
+@Composable
+private fun PreviewBeersScreen() {
+  BeersTheme {
+    BeersScreen(
+      uiState = Success(
+        data = listOf(
+          Beer(
+            id = 1,
+            name = "Fake Lager",
+            tagline = "A Real Bitter Experience.",
+            description = "A light, crisp and bitter IPA brewed with English and American hops. " +
+              "A small batch brewed only once.",
+            imageUrl = "https://images.punkapi.com/v2/keg.png",
+            ingredients = Ingredients(
+              malt = listOf(
+                Ingredient(
+                  name = "Maris Otter Extra Pale",
+                  amount = Amount(
+                    value = "3.3",
+                    unit = "kilograms"
+                  )
+                )
+              ),
+              hops = listOf(
+                Ingredient(
+                  name = "Fuggles",
+                  amount = Amount(
+                    value = "25",
+                    unit = "grams"
+                  )
+                )
+              ),
+              yeast = Ingredient(
+                name = "Wyeast 1056 - American Ale",
+              )
+            )
+          )
+        )
+      ),
+      viewEvent = {},
+      openBeerDetails = { _, _ -> }
+    )
   }
 }
