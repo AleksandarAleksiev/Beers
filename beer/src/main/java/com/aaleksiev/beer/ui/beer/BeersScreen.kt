@@ -19,9 +19,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -45,12 +47,16 @@ internal fun BeersScreen(
   uiState: UiState<List<Beer>>,
   viewEvent: (BeersViewEvent) -> Unit,
 ) {
+  val scrollBehaviour = TopAppBarDefaults.pinnedScrollBehavior()
   Scaffold(
-    modifier = Modifier.fillMaxSize(),
+    modifier = Modifier
+      .fillMaxSize()
+      .nestedScroll(connection = scrollBehaviour.nestedScrollConnection),
     topBar = {
       SimpleTopAppBar(
         title = stringResource(id = string.beers),
         navigationIcon = null,
+        scrollBehavior = scrollBehaviour,
       )
     },
     contentWindowInsets = WindowInsets.noInsets,
