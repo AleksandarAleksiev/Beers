@@ -1,9 +1,9 @@
 package com.aaleksiev.punkapi
 
-import com.aaleksiev.common.model.Amount
-import com.aaleksiev.common.model.Beer
-import com.aaleksiev.common.model.Ingredient
-import com.aaleksiev.common.model.Ingredients
+import com.aaleksiev.core.model.Amount
+import com.aaleksiev.core.model.Beer
+import com.aaleksiev.core.model.Ingredient
+import com.aaleksiev.core.model.Ingredients
 import com.aaleksiev.punkapi.model.request.BeerDetailsRequest
 import com.aaleksiev.punkapi.model.request.BeersRequest
 import com.aaleksiev.punkapi.model.response.BeerResponse

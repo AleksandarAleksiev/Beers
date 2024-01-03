@@ -43,7 +43,7 @@ android {
 
 dependencies {
     val kotlinBoM = platform(libs.kotlinBoM)
-    implementation(project(":common:model"))
+    implementation(project(":core:model"))
 
     implementation(kotlinBoM)
     implementation(libs.androidXCore)

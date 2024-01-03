@@ -1,11 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":common:model")
-
-
-include(":common")
-
-
 pluginManagement {
     repositories {
         google()
@@ -23,3 +17,8 @@ dependencyResolutionManagement {
 rootProject.name = "Beers"
 include(":app")
 include(":punkapi")
+include(":core:model")
+include(":core:data")
+include(":core:designsystem")
+include(":core:ui")
+include(":beer")

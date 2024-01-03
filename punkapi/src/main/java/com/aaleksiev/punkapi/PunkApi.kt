@@ -1,6 +1,6 @@
 package com.aaleksiev.punkapi
 
-import com.aaleksiev.common.model.Beer
+import com.aaleksiev.core.model.Beer
 
 interface PunkApi {
     suspend fun beers(): List<Beer>

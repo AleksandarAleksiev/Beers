@@ -1,9 +1,7 @@
-@file:Suppress("UnstableApiUsage")
-
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
 }
@@ -13,11 +11,7 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.aaleksiev.beers"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -56,8 +50,10 @@ dependencies {
     val kotlinBoM = platform(libs.kotlinBoM)
     debugImplementation(libs.composeTooling)
 
-    implementation(project(":beer"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
 
     implementation(composeBoM)
     implementation(kotlinBoM)
@@ -68,10 +64,13 @@ dependencies {
     implementation(libs.androidXCore)
     implementation(libs.lifecycleRuntime)
 
-    implementation(libs.bundles.ktor)
-    implementation(libs.bundles.navigation)
 
     implementation(libs.hilt)
+    implementation(libs.coil)
+    implementation(libs.lifecycleRuntimeCompose)
+
+    implementation(libs.bundles.navigation)
+    implementation(libs.bundles.ktor)
 
     ksp(libs.hiltCompiler)
 
