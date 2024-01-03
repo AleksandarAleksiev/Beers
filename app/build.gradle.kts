@@ -57,6 +57,7 @@ dependencies {
     debugImplementation(libs.composeTooling)
 
     implementation(project(":beer"))
+    implementation(project(":core:designsystem"))
 
     implementation(composeBoM)
     implementation(kotlinBoM)

@@ -50,6 +50,8 @@ dependencies {
     val kotlinBoM = platform(libs.kotlinBoM)
     debugImplementation(libs.composeTooling)
 
+    implementation(project(":core:designsystem"))
+
     implementation(composeBoM)
     implementation(kotlinBoM)
     implementation(libs.material3)

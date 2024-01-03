@@ -1,12 +1,10 @@
 plugins {
   alias(libs.plugins.androidLibrary)
   alias(libs.plugins.kotlinAndroid)
-  alias(libs.plugins.hilt)
-  alias(libs.plugins.ksp)
 }
 
 android {
-  namespace = "com.aaleksiev.core.data"
+  namespace = "com.aaleksiev.core.designsystem"
   compileSdk = libs.versions.compileSdk.get().toInt()
 
   defaultConfig {
@@ -30,19 +28,20 @@ android {
   kotlin {
     jvmToolchain(17)
   }
+  buildFeatures {
+    compose = true
+  }
+  composeOptions {
+    kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+  }
 }
 
 dependencies {
-  val kotlinBoM = platform(libs.kotlinBoM)
-  implementation(project(":core:model"))
-  implementation(project(":punkapi"))
+  implementation(platform(libs.composeBoM))
+  implementation(platform(libs.kotlinBoM))
 
-  implementation(kotlinBoM)
-  implementation(libs.androidXCore)
-  implementation(libs.hilt)
-
-  ksp(libs.hiltCompiler)
-
-  testImplementation(libs.bundles.unitTest)
-  androidTestImplementation(kotlinBoM)
+  debugImplementation(libs.composeTooling)
+  implementation(libs.material3)
+  implementation(libs.bundles.compose)
+  implementation(libs.bundles.accompanist)
 }

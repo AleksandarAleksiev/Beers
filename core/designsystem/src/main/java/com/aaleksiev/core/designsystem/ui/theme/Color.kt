@@ -1,4 +1,4 @@
-package com.aaleksiev.beers.ui.theme
+package com.aaleksiev.core.designsystem.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val md_theme_light_primary = Color(0xFF616200)
