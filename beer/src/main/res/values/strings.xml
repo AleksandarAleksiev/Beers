@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="beers">Beers</string>
+  <string name="amount">Amount %1$s</string>
+  <string name="malt">Malt</string>
+  <string name="hops">Hops</string>
+  <string name="yeast">Yeast</string>
 </resources>

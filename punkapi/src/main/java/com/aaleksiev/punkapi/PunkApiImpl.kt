@@ -39,7 +39,7 @@ internal class PunkApiImpl @Inject constructor(
         ingredients = Ingredients(
             malt = ingredients.malt.map { it.asIngredient() },
             hops = ingredients.hops.map { it.asIngredient() },
-            yeast = ingredients.yeast,
+            yeast = Ingredient(name = ingredients.yeast),
         )
     )
 
