@@ -34,12 +34,16 @@ import com.aaleksiev.core.ui.UiState.Error
 import com.aaleksiev.core.ui.UiState.Loading
 import com.aaleksiev.core.ui.UiState.Success
 import com.aaleksiev.core.ui.appbar.SimpleTopAppBar
+import com.aaleksiev.core.ui.error.RetryableError
 import com.aaleksiev.core.ui.insets.noInsets
 import com.aaleksiev.core.ui.progress.IndeterminateProgressIndicator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun BeersScreen(uiState: UiState<List<Beer>>) {
+internal fun BeersScreen(
+  uiState: UiState<List<Beer>>,
+  retry: () -> Unit,
+) {
   Scaffold(
     modifier = Modifier.fillMaxSize(),
     topBar = {
@@ -53,7 +57,13 @@ internal fun BeersScreen(uiState: UiState<List<Beer>>) {
     Crossfade(targetState = uiState, label = "BeersScreenCrossFade") { state ->
       when (state) {
         is Loading -> IndeterminateProgressIndicator(modifier = Modifier.padding(paddings))
-        is Error -> {}
+        is Error -> RetryableError(
+          modifier = Modifier
+            .padding(paddings)
+            .fillMaxWidth(),
+          retry = retry,
+        )
+
         is Success -> BeersList(
           modifier = Modifier.padding(paddings),
           beers = state.data
