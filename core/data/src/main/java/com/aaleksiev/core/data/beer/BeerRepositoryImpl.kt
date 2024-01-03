@@ -9,11 +9,15 @@ import javax.inject.Inject
 internal class BeerRepositoryImpl @Inject constructor(
   private val punkApi: PunkApi
 ) : BeerRepository {
-  override fun beers(): Flow<List<Beer>> = flow {
-    emit(punkApi.beers())
+  override fun beers(): Flow<Result<List<Beer>>> = flow {
+    emit(
+      runCatching { punkApi.beers() }
+    )
   }
 
-  override fun beerDetails(id: Long): Flow<Beer> = flow {
-    emit(punkApi.beerDetails(id))
+  override fun beerDetails(id: Long): Flow<Result<Beer>> = flow {
+    emit(
+      runCatching { punkApi.beerDetails(id) }
+    )
   }
 }

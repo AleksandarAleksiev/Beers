@@ -1,4 +1,4 @@
-package com.aaleksiev.core.ui
+package com.aaleksiev.core.ui.appbar
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
@@ -22,9 +22,9 @@ import com.aaleksiev.core.ui.preview.ThemePreview
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun SmallTopAppBar(
+fun SimpleTopAppBar(
   title: String,
-  navigateUp: () -> Unit,
+  navigateUp: () -> Unit = {},
   navigationIcon: ImageVector? = Icons.Default.ArrowBack,
   colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(
     containerColor =  MaterialTheme.colorScheme.background,
@@ -61,7 +61,7 @@ fun SmallTopAppBar(
 @ThemePreview
 private fun PreviewSmallTopAppBar() {
   BeersTheme {
-    SmallTopAppBar(
+    SimpleTopAppBar(
       title = "Simple top app bar",
       navigateUp = { }
     )

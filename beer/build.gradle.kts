@@ -51,6 +51,9 @@ dependencies {
     debugImplementation(libs.composeTooling)
 
     implementation(project(":core:designsystem"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
 
     implementation(composeBoM)
     implementation(kotlinBoM)
@@ -61,10 +64,13 @@ dependencies {
     implementation(libs.androidXCore)
     implementation(libs.lifecycleRuntime)
 
-    implementation(libs.bundles.ktor)
 
     implementation(libs.hilt)
+    implementation(libs.coil)
+    implementation(libs.lifecycleRuntimeCompose)
+
     implementation(libs.bundles.navigation)
+    implementation(libs.bundles.ktor)
 
     ksp(libs.hiltCompiler)
 
