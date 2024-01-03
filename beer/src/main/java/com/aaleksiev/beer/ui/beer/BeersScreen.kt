@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.aaleksiev.beer.ui.beer.BeersViewEvent.Reload
 import com.aaleksiev.beers.R.string
 import com.aaleksiev.core.designsystem.ui.theme.paddings
 import com.aaleksiev.core.model.Beer
@@ -42,7 +43,7 @@ import com.aaleksiev.core.ui.progress.IndeterminateProgressIndicator
 @Composable
 internal fun BeersScreen(
   uiState: UiState<List<Beer>>,
-  retry: () -> Unit,
+  viewEvent: (BeersViewEvent) -> Unit,
 ) {
   Scaffold(
     modifier = Modifier.fillMaxSize(),
@@ -61,7 +62,7 @@ internal fun BeersScreen(
           modifier = Modifier
             .padding(paddings)
             .fillMaxWidth(),
-          retry = retry,
+          retry = { viewEvent(Reload) },
         )
 
         is Success -> BeersList(

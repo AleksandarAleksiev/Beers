@@ -23,7 +23,10 @@ object BeersNavigation {
         composable(route = "BeersScreen") {
             val beersViewModel: BeersViewModel = hiltViewModel()
             val uiState by beersViewModel.beersUiState.collectAsStateWithLifecycle()
-            BeersScreen(uiState)
+            BeersScreen(
+                uiState = uiState,
+                viewEvent = beersViewModel::setEvent
+            )
         }
     }
 
