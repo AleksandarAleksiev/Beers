@@ -35,6 +35,7 @@ import com.aaleksiev.core.ui.UiState.Loading
 import com.aaleksiev.core.ui.UiState.Success
 import com.aaleksiev.core.ui.appbar.SimpleTopAppBar
 import com.aaleksiev.core.ui.insets.noInsets
+import com.aaleksiev.core.ui.progress.IndeterminateProgressIndicator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,7 +52,7 @@ internal fun BeersScreen(uiState: UiState<List<Beer>>) {
   ) { paddings ->
     Crossfade(targetState = uiState, label = "BeersScreenCrossFade") { state ->
       when (state) {
-        is Loading -> {}
+        is Loading -> IndeterminateProgressIndicator(modifier = Modifier.padding(paddings))
         is Error -> {}
         is Success -> BeersList(
           modifier = Modifier.padding(paddings),
