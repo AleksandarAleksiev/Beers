@@ -18,4 +18,5 @@ rootProject.name = "Beers"
 include(":app")
 include(":punkapi")
 include(":core:model")
+include(":core:data")
 include(":beer")
