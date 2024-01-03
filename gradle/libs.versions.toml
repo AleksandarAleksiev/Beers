@@ -19,6 +19,7 @@ lifecycleViewModelCompose = "2.6.2"
 accompanistuiController = "0.32.0"
 
 androidXCore = "1.12.0"
+androidXTestRunner = "1.5.2"
 
 ktor = "2.3.7"
 kotlinX = "1.6.0"
@@ -33,6 +34,7 @@ coil = "2.5.0"
 junitTest = "4.13.2"
 androidTestJUnit4 = "1.1.5"
 androidTestEspresso = "3.5.1"
+mockk = "1.13.3"
 
 [libraries]
 #BoM
@@ -63,6 +65,7 @@ lifecycleViewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-c
 
 #androidX
 androidXCore = { module = "androidx.core:core-ktx", version.ref = "androidXCore" }
+androidxTestRunner = { module = "androidx.test:runner", version.ref = "androidXTestRunner" }
 
 #ktor
 ktorContentNegotioation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -79,11 +82,13 @@ kotlinXSerialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-j
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hiltCompiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hiltNavigationCompose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+hiltAndroidTesting = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 
 #coil
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 #unit test
+mockK = { module = "io.mockk:mockk", version.ref = "mockk" }
 junitTest = { module = "junit:junit", version.ref = "junitTest" }
 kotlinTest = { module = "org.jetbrains.kotlin:kotlin-test" }
 kotlinJunitTest = { module = "org.jetbrains.kotlin:kotlin-test-junit" }
@@ -91,6 +96,7 @@ kotlinJunitTest = { module = "org.jetbrains.kotlin:kotlin-test-junit" }
 #android tests
 androidTestEspressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "androidTestEspresso" }
 androidTestJunit4 = { module = "androidx.test.ext:junit", version.ref = "androidTestJUnit4" }
+composeUiTest = { module = "androidx.compose.ui:ui-test" }
 androidCompioseUiTestJunit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidCompioseUiTestManifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
@@ -109,5 +115,5 @@ navigation = ["composeNavigation", "hiltNavigationCompose"]
 accompanist = ["accompanistUiController"]
 ktor = ["ktorCIO", "ktorJson", "ktorWebSockets", "ktorLogging", "ktorContentNegotioation", "ktorResources"]
 kotlinX = ["kotlinXSerialization"]
-unitTest = ["androidTestJunit4", "kotlinTest", "kotlinJunitTest"]
-androidTest = ["androidTestJunit4", "androidCompioseUiTestJunit4", "androidTestEspressoCore", "kotlinTest", "kotlinJunitTest"]
+unitTest = ["androidTestJunit4", "kotlinTest", "kotlinJunitTest", "mockK"]
+androidTest = ["androidTestJunit4", "composeUiTest", "androidCompioseUiTestJunit4", "androidTestEspressoCore", "kotlinTest", "kotlinJunitTest", "hiltAndroidTesting"]

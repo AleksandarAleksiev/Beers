@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 
 @Composable
 fun IndeterminateProgressIndicator(
@@ -18,6 +19,9 @@ fun IndeterminateProgressIndicator(
     modifier = modifier.fillMaxSize(),
     contentAlignment = Alignment.Center
   ) {
-    CircularProgressIndicator(color = color)
+    CircularProgressIndicator(
+      modifier = Modifier.testTag(tag = "IndeterminateProgressIndicator"),
+      color = color
+    )
   }
 }

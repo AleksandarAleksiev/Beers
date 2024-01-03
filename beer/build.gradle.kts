@@ -49,6 +49,7 @@ dependencies {
     val composeBoM = platform(libs.composeBoM)
     val kotlinBoM = platform(libs.kotlinBoM)
     debugImplementation(libs.composeTooling)
+    debugImplementation(libs.androidCompioseUiTestManifest)
 
     implementation(project(":core:designsystem"))
     implementation(project(":core:ui"))
@@ -80,5 +81,4 @@ dependencies {
     androidTestImplementation(kotlinBoM)
     androidTestImplementation(composeBoM)
     androidTestImplementation(libs.bundles.androidTest)
-    debugImplementation(libs.androidCompioseUiTestManifest)
 }
