@@ -1,4 +1,4 @@
-package com.aaleksiev.common.model
+package com.aaleksiev.core.model
 
 data class Beer(
     val id: Long,

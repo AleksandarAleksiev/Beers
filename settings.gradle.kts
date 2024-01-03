@@ -17,5 +17,5 @@ dependencyResolutionManagement {
 rootProject.name = "Beers"
 include(":app")
 include(":punkapi")
-include(":common:model")
+include(":core:model")
 include(":beer")
