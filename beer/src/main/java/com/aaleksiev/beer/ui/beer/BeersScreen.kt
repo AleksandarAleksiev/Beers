@@ -1,6 +1,7 @@
 package com.aaleksiev.beer.ui.beer
 
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,7 +29,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.aaleksiev.beer.ui.beer.BeersViewEvent.Reload
+import com.aaleksiev.beer.ui.BeersViewEvent
+import com.aaleksiev.beer.ui.BeersViewEvent.Reload
 import com.aaleksiev.beers.R.string
 import com.aaleksiev.core.designsystem.ui.theme.paddings
 import com.aaleksiev.core.model.Beer
@@ -46,6 +48,7 @@ import com.aaleksiev.core.ui.progress.IndeterminateProgressIndicator
 internal fun BeersScreen(
   uiState: UiState<List<Beer>>,
   viewEvent: (BeersViewEvent) -> Unit,
+  openBeerDetails: (Long, String) -> Unit,
 ) {
   val scrollBehaviour = TopAppBarDefaults.pinnedScrollBehavior()
   Scaffold(
@@ -73,7 +76,8 @@ internal fun BeersScreen(
 
         is Success -> BeersList(
           modifier = Modifier.padding(paddings),
-          beers = state.data
+          beers = state.data,
+          openBeerDetails = openBeerDetails,
         )
       }
     }
@@ -83,7 +87,8 @@ internal fun BeersScreen(
 @Composable
 private fun BeersList(
   modifier: Modifier = Modifier,
-  beers: List<Beer>
+  beers: List<Beer>,
+  openBeerDetails: (Long, String) -> Unit,
 ) {
   LazyColumn(
     modifier = modifier,
@@ -96,15 +101,23 @@ private fun BeersList(
     verticalArrangement = Arrangement.spacedBy(MaterialTheme.paddings.small),
   ) {
     items(items = beers, key = { beer -> beer.id }) { beer ->
-      BeerItem(beer)
+      BeerItem(
+        beer = beer,
+        openBeerDetails = openBeerDetails,
+      )
     }
   }
 }
 
 @Composable
-private fun BeerItem(beer: Beer) {
+private fun BeerItem(
+  beer: Beer,
+  openBeerDetails: (Long, String) -> Unit,
+) {
   Card(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = Modifier
+      .fillMaxWidth()
+      .clickable { openBeerDetails(beer.id, beer.name) },
   ) {
     Row(
       modifier = Modifier.padding(MaterialTheme.paddings.small),

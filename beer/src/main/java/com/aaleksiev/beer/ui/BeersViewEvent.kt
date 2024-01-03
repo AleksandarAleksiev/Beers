@@ -1,4 +1,4 @@
-package com.aaleksiev.beer.ui.beer
+package com.aaleksiev.beer.ui
 
 sealed interface BeersViewEvent {
   data object Reload : BeersViewEvent

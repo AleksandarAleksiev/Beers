@@ -1,10 +1,10 @@
 package com.aaleksiev.core.ui.appbar
 
-import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -13,9 +13,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import com.aaleksiev.core.designsystem.ui.theme.BeersTheme
 import com.aaleksiev.core.ui.preview.ThemePreview
@@ -41,14 +39,12 @@ fun SimpleTopAppBar(
     },
     navigationIcon = {
       if (navigationIcon != null) {
-        Icon(
-          modifier = Modifier.clickable(
-            role = Role.Button,
-            onClick = navigateUp
-          ),
-          imageVector = navigationIcon,
-          contentDescription = null,
-        )
+        IconButton(onClick = navigateUp) {
+          Icon(
+            imageVector = navigationIcon,
+            contentDescription = null,
+          )
+        }
       }
     },
     scrollBehavior = scrollBehavior,

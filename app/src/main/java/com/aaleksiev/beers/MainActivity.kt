@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
               val navController = rememberNavController()
               NavHost(
                 navController = navController,
-                startDestination = BeersNavigation.Beers
+                startDestination = BeersNavigation.BEERS
               ) {
                 beersNavGraph(navController)
               }

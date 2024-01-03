@@ -26,7 +26,8 @@ internal class PunkApiImpl @Inject constructor(
     override suspend fun beerDetails(id: Long): Beer =
         httpClient
             .get(BeerDetailsRequest(id))
-            .body<BeerResponse>()
+            .body<List<BeerResponse>>()
+            .first()
             .asBeer()
 
     private fun BeerResponse.asBeer() = Beer(
