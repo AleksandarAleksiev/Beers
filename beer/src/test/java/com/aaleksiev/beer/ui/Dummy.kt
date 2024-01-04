@@ -1,4 +1,4 @@
-package com.aaleksiev.beer.ui.beer
+package com.aaleksiev.beer.ui
 
 import com.aaleksiev.core.model.Amount
 import com.aaleksiev.core.model.Beer

@@ -1,4 +1,4 @@
-package com.aaleksiev.beer.ui.beer
+package com.aaleksiev.beer.ui
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

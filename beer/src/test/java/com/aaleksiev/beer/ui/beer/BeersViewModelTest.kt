@@ -2,6 +2,8 @@ package com.aaleksiev.beer.ui.beer
 
 import app.cash.turbine.test
 import com.aaleksiev.beer.ui.BeersViewEvent.Reload
+import com.aaleksiev.beer.ui.CoroutinesTestRule
+import com.aaleksiev.beer.ui.Dummy
 import com.aaleksiev.core.data.beer.BeerRepository
 import com.aaleksiev.core.ui.UiState
 import io.mockk.MockKAnnotations
@@ -22,40 +24,40 @@ class BeersViewModelTest {
   val coroutinesTestRule = CoroutinesTestRule()
 
   @MockK
-  private lateinit var beersRepository: BeerRepository
+  private lateinit var beerRepository: BeerRepository
 
   private lateinit var underTest: BeersViewModel
 
   @Before
   fun setUp() {
     MockKAnnotations.init(this)
-    underTest = BeersViewModel(beersRepository)
+    underTest = BeersViewModel(beerRepository)
   }
 
   @Test
   fun willLoadBeers() = runTest {
-    every { beersRepository.beers() } returns flowOf(Result.success(Dummy.beers))
+    every { beerRepository.beers() } returns flowOf(Result.success(Dummy.beers))
     underTest.beersUiState.test {
       assertEquals(UiState.Success(Dummy.beers), awaitItem())
     }
 
-    verify(exactly = 1) { beersRepository.beers() }
+    verify(exactly = 1) { beerRepository.beers() }
   }
 
   @Test
   fun willEmitErrorState() = runTest {
-    every { beersRepository.beers() } returns flowOf(Result.failure(UnsupportedOperationException()))
+    every { beerRepository.beers() } returns flowOf(Result.failure(UnsupportedOperationException()))
     underTest.beersUiState.test {
       assertEquals(UiState.Error, awaitItem())
     }
 
-    verify(exactly = 1) { beersRepository.beers() }
+    verify(exactly = 1) { beerRepository.beers() }
   }
 
   @Test
   fun willReloadBeers() = runTest {
     every {
-      beersRepository.beers()
+      beerRepository.beers()
     } returns flowOf(Result.failure(UnsupportedOperationException())) andThen
       flowOf(Result.success(Dummy.beers))
 
@@ -69,6 +71,6 @@ class BeersViewModelTest {
       assertEquals(UiState.Success(Dummy.beers), awaitItem())
     }
 
-    verify(exactly = 2) { beersRepository.beers() }
+    verify(exactly = 2) { beerRepository.beers() }
   }
 }
