@@ -6,15 +6,18 @@ import com.aaleksiev.beer.ui.BeersViewEvent
 import com.aaleksiev.beer.ui.BeersViewEvent.Reload
 import com.aaleksiev.core.data.beer.BeerRepository
 import com.aaleksiev.core.ui.UiState
+import com.aaleksiev.core.ui.UiState.Loading
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.transformLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,12 +32,17 @@ class BeersViewModel @Inject constructor(
   val beersUiState = beersViewEventFlow
     .onStart { emit(Reload) }
     .filter { it is Reload }
-    .flatMapLatest { beersRepository.beers() }
-    .mapLatest { result ->
-      result.fold(
-        onSuccess = { UiState.Success(data = it) },
-        onFailure = { UiState.Error }
-      )
+    .transformLatest {
+      emit(Loading)
+      beersRepository.beers()
+        .map { result ->
+          result.fold(
+            onSuccess = { UiState.Success(data = it) },
+            onFailure = { UiState.Error }
+          )
+        }
+        .onEach { state -> emit(state) }
+        .collect()
     }
     .stateIn(
       scope = viewModelScope,
