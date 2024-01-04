@@ -35,6 +35,7 @@ junitTest = "4.13.2"
 androidTestJUnit4 = "1.1.5"
 androidTestEspresso = "3.5.1"
 mockk = "1.13.3"
+turbine = "1.0.0"
 
 [libraries]
 #BoM
@@ -77,6 +78,7 @@ ktorResources = { module = "io.ktor:ktor-client-resources", version.ref = "ktor"
 
 #kotlinx
 kotlinXSerialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinX" }
+kotlinxCoroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
 
 #hilt
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
@@ -92,6 +94,7 @@ mockK = { module = "io.mockk:mockk", version.ref = "mockk" }
 junitTest = { module = "junit:junit", version.ref = "junitTest" }
 kotlinTest = { module = "org.jetbrains.kotlin:kotlin-test" }
 kotlinJunitTest = { module = "org.jetbrains.kotlin:kotlin-test-junit" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 #android tests
 androidTestEspressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "androidTestEspresso" }
@@ -115,5 +118,5 @@ navigation = ["composeNavigation", "hiltNavigationCompose"]
 accompanist = ["accompanistUiController"]
 ktor = ["ktorCIO", "ktorJson", "ktorWebSockets", "ktorLogging", "ktorContentNegotioation", "ktorResources"]
 kotlinX = ["kotlinXSerialization"]
-unitTest = ["androidTestJunit4", "kotlinTest", "kotlinJunitTest", "mockK"]
+unitTest = ["junitTest", "androidTestJunit4", "kotlinTest", "kotlinJunitTest", "mockK", "kotlinxCoroutinesTest", "turbine"]
 androidTest = ["androidTestJunit4", "composeUiTest", "androidCompioseUiTestJunit4", "androidTestEspressoCore", "kotlinTest", "kotlinJunitTest", "hiltAndroidTesting"]
